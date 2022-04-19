@@ -1,1 +1,1 @@
-"# something-sonic" 
+# something-sonic
