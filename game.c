@@ -1,5 +1,6 @@
 #include "SDL.h"
-#include "stdbool.h"
+#include <stdbool.h>
+#include "src/input.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,15 +25,8 @@ int main(int argc, char *argv[])
     // While application is running
     while (!quit)
     {
-        // Handle events on queue
-        while (SDL_PollEvent(&event) != 0)
-        {
-            // User requests quit
-            if (event.type == SDL_QUIT)
-            {
-                quit = true;
-            }
-        }
+        do_input(&quit, &event);
+
         SDL_SetRenderDrawColor(renderer, 0x30, 0x19, 0x34, 0xff);
         SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
