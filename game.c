@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include <stdbool.h>
 #include "src/input.h"
+#include "src/player.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +9,7 @@ int main(int argc, char *argv[])
     SDL_Renderer *renderer;
     SDL_Surface *surface;
     SDL_Event event;
+    Player *p;
     bool quit = false;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -25,7 +27,7 @@ int main(int argc, char *argv[])
     // While application is running
     while (!quit)
     {
-        do_input(&quit, &event);
+        do_input(&quit, &event, p);
 
         SDL_SetRenderDrawColor(renderer, 0x30, 0x19, 0x34, 0xff);
         SDL_RenderClear(renderer);

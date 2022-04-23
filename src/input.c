@@ -1,9 +1,51 @@
 #include "SDL.h"
 #include <stdbool.h>
+#include "player.h"
 
 #include "input.h"
 
-void do_input(bool *quit, SDL_Event *e)
+void do_key_down(SDL_KeyboardEvent *e, Player *p)
+{
+    if (e->repeat == 0)
+    {
+        switch (e->keysym.scancode)
+        {
+        case SDL_SCANCODE_UP:
+            p->pos.x = 1;
+            break;
+        case SDL_SCANCODE_DOWN:
+            break;
+        case SDL_SCANCODE_LEFT:
+            break;
+        case SDL_SCANCODE_RIGHT:
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void do_key_up(SDL_KeyboardEvent *e, Player *p)
+{
+    if (e->repeat == 0)
+    {
+        switch (e->keysym.scancode)
+        {
+        case SDL_SCANCODE_UP:
+            break;
+        case SDL_SCANCODE_DOWN:
+            break;
+        case SDL_SCANCODE_LEFT:
+            break;
+        case SDL_SCANCODE_RIGHT:
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void do_input(bool *quit, SDL_Event *e, Player *p)
 {
     // Handle events on queue
     while (SDL_PollEvent(e) != 0)
@@ -14,50 +56,10 @@ void do_input(bool *quit, SDL_Event *e)
             *quit = true;
             break;
         case SDL_KEYDOWN:
-            do_key_down(&(e->key));
+            do_key_down(&(e->key), p);
             break;
         case SDL_KEYUP:
-            do_key_up(&(e->key));
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void do_key_down(SDL_KeyboardEvent *e)
-{
-    if (e->repeat == 0)
-    {
-        switch (e->keysym.scancode)
-        {
-        case SDL_SCANCODE_UP:
-            break;
-        case SDL_SCANCODE_DOWN:
-            break;
-        case SDL_SCANCODE_LEFT:
-            break;
-        case SDL_SCANCODE_RIGHT:
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void do_key_up(SDL_KeyboardEvent *e)
-{
-    if (e->repeat == 0)
-    {
-        switch (e->keysym.scancode)
-        {
-        case SDL_SCANCODE_UP:
-            break;
-        case SDL_SCANCODE_DOWN:
-            break;
-        case SDL_SCANCODE_LEFT:
-            break;
-        case SDL_SCANCODE_RIGHT:
+            do_key_up(&(e->key), p);
             break;
         default:
             break;

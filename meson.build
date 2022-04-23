@@ -10,5 +10,8 @@ executable('game', src,
            win_subsystem: 'windows',
            dependencies: sdl2_dep)
 
-e = executable('prog', 'test/testprog.c', dependencies: cmocka_dep)
-test('testing tests', e)
+test_exe = executable('prog', 'test/testprog.c', dependencies: cmocka_dep)
+test('testing tests', test_exe)
+
+inputs_exe = executable('inputs', ['test/testinput.c', 'src/input.c'], dependencies: [cmocka_dep, sdl2_dep])
+test('test inputs', inputs_exe)
